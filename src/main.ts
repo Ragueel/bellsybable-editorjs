@@ -1,23 +1,13 @@
 import './style.css';
 
-import { RenderRequest, RenderResponse } from './request';
-
-
-const DEFAULT_STYLES = [
-  'monokai',
-];
-
-const DEFAULT_LANGUAGES = [
-  'go',
-  'javascript',
-  'typescript',
-  'php',
-  'bash'
-];
+import { createEl, createSelect } from './utils';
+import Config from './config';
+import { RenderRequest } from './request';
 
 class BellsybableBlock {
   private data: SaveData;
   private config: Config;
+  private wrapper: HTMLElement | null;
 
   static get toolbox() {
     return {
@@ -29,39 +19,89 @@ class BellsybableBlock {
   constructor(block: any) {
     this.data = <SaveData>block.data;
     this.config = new Config();
+    this.wrapper = null;
   }
 
   render() {
-    console.log(this.config);
-    const wrapperDiv = create('div', ['bb-wrapper']);
+    const wrapperDiv = createEl('div', ['bb-wrapper']);
+    this.wrapper = wrapperDiv;
 
-    const input = <HTMLTextAreaElement>create('textarea', ['bb-code-block']);
-    input.value = this.data ? this.data.code : '';
-    input.rows = 5;
-
-    const inputControls = create('div', ['bb-code-block']);
-    const selectLanguage = <HTMLSelectElement>create('select', ['bb-select']);
-    this.config.languages.forEach(lang => {
-      const option = <HTMLOptionElement>create('option', ['bb-select-option']);
-      option.value = lang;
-      option.text = lang;
-      selectLanguage.options.add(option);
+    const codeArea = <HTMLTextAreaElement>createEl('textarea', ['bb-code-block', 'bb-code-area', 'bb-input']);
+    codeArea.value = this.data ? this.data.code : '';
+    codeArea.rows = 5;
+    const autoGenerateTimeout = 1500;
+    let typingTimer: number | undefined;
+    const gCode = async () => await this.generateCode();
+    codeArea.addEventListener('keyup', () => {
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+      }
+      if (codeArea.value) {
+        typingTimer = setTimeout(gCode, autoGenerateTimeout);
+      }
     });
 
-    const generateButton = <HTMLButtonElement>create('button', ['bb-button']);
-    generateButton.textContent = 'Generate';
+    const inputControls = createEl('div', ['bb-code-block', 'bb-input-controls']);
+    const codeBlockName = <HTMLInputElement>createEl('input', ['bb-input']);
+    codeBlockName.type = 'text';
 
+    const selectLanguage = createSelect('bb-select', this.config.languages);
+    const selectStyle = createSelect('bb-select', this.config.styles);
+
+    const generateButton = <HTMLButtonElement>createEl('button', ['bb-button']);
+    generateButton.textContent = 'Generate';
+    generateButton.addEventListener('click', async () => {
+      await gCode();
+    });
+
+    inputControls.appendChild(codeBlockName);
     inputControls.appendChild(selectLanguage);
+    inputControls.appendChild(selectStyle);
     inputControls.appendChild(generateButton);
 
-    const renderedDiv = create('div', ['bb-code-block', 'bb-rendered-code']);
+    const renderedDiv = createEl('div', ['bb-code-block', 'bb-rendered-code']);
 
     wrapperDiv.appendChild(inputControls);
-    wrapperDiv.appendChild(input);
+    wrapperDiv.appendChild(codeArea);
     wrapperDiv.appendChild(renderedDiv);
 
     return wrapperDiv;
   }
+
+  async generateCode() {
+    if (!this.wrapper) {
+      console.error('Wrapper is not initialized');
+      return;
+    }
+    const code = this._getAreaCodeFromWrapper();
+    const language = this._getLanguageFromWrapper();
+    const style = this._getStyleFromWrapper();
+
+    const request = new RenderRequest(code, style, language);
+
+    console.log(`${language} ${style}\n${code}`);
+    console.log(request);
+
+    const response = await this.config.generatorFunction(request);
+    console.log(response);
+  }
+
+  _getAreaCodeFromWrapper(): string {
+    const textArea = <HTMLTextAreaElement>this.wrapper!.children[1];
+    return textArea.value;
+  }
+
+  _getLanguageFromWrapper() {
+    const languageSelect = <HTMLSelectElement>this.wrapper!.children[0].children[1];
+    return languageSelect.value;
+  }
+
+  _getStyleFromWrapper() {
+    const styleSelect = <HTMLSelectElement>this.wrapper!.children[0].children[2];
+    return styleSelect.value;
+  }
+
+  save() { }
 }
 
 class SaveData {
@@ -73,49 +113,5 @@ class SaveData {
   }
 }
 
-class Config {
-  public generatorFunction: Function;
-  public styles: Array<string>;
-  public languages: Array<string>;
-
-  constructor(generatorFunction: Function | null = null, generateUrl: string = '/api/bellsybable/generate',
-    styles: Array<string> | null = null, languages: Array<string> | null = null) {
-    if (!generatorFunction) {
-      this.generatorFunction = async (request: RenderRequest) => {
-        const response = await fetch(generateUrl!, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(request)
-        });
-        const responseJson = await response.json();
-        return Promise.resolve(<RenderResponse>responseJson);
-      };
-    } else {
-      this.generatorFunction = generatorFunction;
-    }
-
-    if (!styles) {
-      this.styles = DEFAULT_STYLES;
-    } else {
-      this.styles = styles;
-    }
-    if (!languages) {
-      this.languages = DEFAULT_LANGUAGES;
-    } else {
-      this.languages = languages;
-    }
-  }
-}
-
-function create(type: string, classes: Array<string> | null = null): HTMLElement {
-  const element = document.createElement(type);
-  if (classes) {
-    element.classList.add(...classes);
-  }
-
-  return element;
-}
 
 export default BellsybableBlock;

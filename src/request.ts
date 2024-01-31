@@ -1,9 +1,5 @@
 
 class RenderRequest {
-
-}
-
-class RenderResponse {
   public code: string;
   public style: string;
   public language: string;
@@ -14,4 +10,13 @@ class RenderResponse {
     this.language = language;
   }
 }
+
+class RenderResponse {
+  public code: string;
+
+  constructor(code: string) {
+    this.code = code;
+  }
+}
+
 export { RenderRequest, RenderResponse };

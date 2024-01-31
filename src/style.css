@@ -9,9 +9,44 @@
   padding-right: 1rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
-  background-color: aquamarine;
+  background-color: black;
+  color: white;
+}
+
+.bb-input-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.bb-code-area {
+  margin-top: 0.5rem;
+  resize: vertical;
 }
 
 .bb-select {
-  height: 100%;
+  display: block;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: #D1D5DB;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #111827;
+  background-color: #F9FAFB;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+}
+
+.bb-input {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
 }
