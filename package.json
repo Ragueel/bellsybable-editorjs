@@ -1,12 +1,18 @@
 {
   "name": "bellsybable-block",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.4",
   "type": "module",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "import": "./dist/bellsybable-block.js",
-      "require": "./dist/bellsybable-block.umd.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     }
   },
   "scripts": {
@@ -15,9 +21,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^20.11.15",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vite-plugin-css-injected-by-js": "^3.3.1"
+    "vite-plugin-css-injected-by-js": "^3.3.1",
+    "vite-plugin-dts": "^3.7.2"
   },
   "license": "MIT",
   "keywords": [
@@ -25,6 +33,5 @@
     "code",
     "tool",
     "editorjs"
-  ],
-  "dependencies": {}
+  ]
 }

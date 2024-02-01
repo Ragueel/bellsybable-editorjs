@@ -54,7 +54,7 @@ class BellsybableBlock {
     });
     if (this.config.autoGenerate) {
       const autoGenerateTimeoutMilliSeconds = 1000;
-      let typingTimer: number | undefined;
+      let typingTimer: NodeJS.Timeout | undefined;
       codeArea.addEventListener('keyup', () => {
         if (typingTimer) {
           clearTimeout(typingTimer);
