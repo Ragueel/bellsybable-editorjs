@@ -38,8 +38,8 @@ const editor = new EditorJS({
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | generatorFunction | Function used to send your request. See payload structure:[Payload](/https://github.com/Ragueel/bellsybable-editorjs/) |
 | generateUrl       | If you are using default generator just change it to a desired endpoint                                                |
-| styles            | Generation styles that can be used during rendering. See: [styles](/docs/styles.md)                                    |
-| languages         | Languages that bellsybable should work. See: [languages](/docs/languages.md)                                           |
+| styles            | Themes that can be used during rendering. See: [styles](/docs/styles.md)                                               |
+| languages         | Languages that bellsybable supports. See: [languages](/docs/languages.md)                                              |
 | autoGenerate      | `true` or `false` whether to send automatically render request after user finishes typing                              |
 | defaultStyle      | which style should new blocks use                                                                                      |
 | defaultLanguage   | which language is selected by default                                                                                  |
