@@ -19,7 +19,7 @@ class BellsybableBlock {
 
   constructor(block: any) {
     this.data = Object.keys(block.data).length > 0 ? <SaveData>block.data : null;
-    this.config = new Config();
+    this.config = Object.keys(block.config).length > 0 ? <Config>block.config : new Config();
     this.wrapper = null;
   }
 
