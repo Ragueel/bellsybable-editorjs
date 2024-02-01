@@ -22,31 +22,39 @@ class BellsybableBlock {
     this.wrapper = null;
   }
 
+  static get enableLineBreaks() {
+    return true;
+  }
+
   render() {
     const wrapperDiv = createEl('div', ['bb-wrapper']);
     this.wrapper = wrapperDiv;
 
     const codeArea = <HTMLTextAreaElement>createEl('textarea', ['bb-code-block', 'bb-code-area', 'bb-input']);
     codeArea.value = this.data ? this.data.code : '';
-    codeArea.rows = 5;
-    const autoGenerateTimeout = 1500;
-    let typingTimer: number | undefined;
+    codeArea.rows = 9;
     const gCode = async () => await this.generateCode();
-    codeArea.addEventListener('keyup', () => {
-      if (typingTimer) {
-        clearTimeout(typingTimer);
-      }
-      if (codeArea.value) {
-        typingTimer = setTimeout(gCode, autoGenerateTimeout);
-      }
-    });
+    if (this.config.autoGenerate) {
+      const autoGenerateTimeout = 1500;
+      let typingTimer: number | undefined;
+      codeArea.addEventListener('keyup', () => {
+        if (typingTimer) {
+          clearTimeout(typingTimer);
+        }
+        if (codeArea.value) {
+          typingTimer = setTimeout(gCode, autoGenerateTimeout);
+        }
+      });
+    }
 
     const inputControls = createEl('div', ['bb-code-block', 'bb-input-controls']);
     const codeBlockName = <HTMLInputElement>createEl('input', ['bb-input']);
     codeBlockName.type = 'text';
 
     const selectLanguage = createSelect('bb-select', this.config.languages);
+    selectLanguage.value = this.config.defaultLanguage;
     const selectStyle = createSelect('bb-select', this.config.styles);
+    selectStyle.value = this.config.defaultStyle;
 
     const generateButton = <HTMLButtonElement>createEl('button', ['bb-button']);
     generateButton.textContent = 'Generate';
@@ -79,11 +87,10 @@ class BellsybableBlock {
 
     const request = new RenderRequest(code, style, language);
 
-    console.log(`${language} ${style}\n${code}`);
-    console.log(request);
-
     const response = await this.config.generatorFunction(request);
-    console.log(response);
+
+    const generatedCodeBlock = this.wrapper.children[2];
+    generatedCodeBlock.innerHTML = response.code;
   }
 
   _getAreaCodeFromWrapper(): string {
@@ -101,7 +108,9 @@ class BellsybableBlock {
     return styleSelect.value;
   }
 
-  save() { }
+  save() {
+    //  asasd
+  }
 }
 
 class SaveData {

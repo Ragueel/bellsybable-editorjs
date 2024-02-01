@@ -5,7 +5,7 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       name: 'BellsybableBlock',
-      entry: ['src/main.ts', 'src/style.css'],
+      entry: 'src/main.ts',
     }
   },
   plugins: [

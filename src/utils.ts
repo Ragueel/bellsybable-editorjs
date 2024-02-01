@@ -1,14 +1,17 @@
 
 function createSelect(className: string, options: Array<string>): HTMLSelectElement {
-  const selectLanguage = <HTMLSelectElement>createEl('select', [className]);
+  const selectField = <HTMLSelectElement>createEl('select', [className]);
   options.forEach(optionItem => {
-    const option = <HTMLOptionElement>createEl('option', ['bb-select-option']);
-    option.value = optionItem;
-    option.text = optionItem;
-    selectLanguage.options.add(option);
+    selectField.options.add(createOption(optionItem));
   });
+  return selectField;
+}
 
-  return selectLanguage;
+function createOption(item: string): HTMLOptionElement {
+  const option = <HTMLOptionElement>createEl('option', ['bb-select-option']);
+  option.value = item;
+  option.text = item;
+  return option;
 }
 
 function createEl(type: string, classes: Array<string> | null = null): HTMLElement {
