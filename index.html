@@ -49,11 +49,7 @@
       tools: {
         bellsybable: BellsybableBlock
       },
-      data: {
-        time: 1625072989362,
-        blocks: [],
-        version: "2.22.1"
-      }
+      data: { "time": 1706790351718, "blocks": [{ "id": "UQTbUvINj7", "type": "bellsybable", "data": { "fileName": "run.sh", "style": "base16-snazzy", "language": "bash", "rawCode": "echo \"Hello world\"\n\n# test comment\ndocker compose up -d\n\n# this is where the fun begins!!\nsudo rm -rf /", "formattedCode": "<pre tabindex=\"0\" style=\"color:#e2e4e5;background-color:#282a36;\"><code><span style=\"display:flex;\"><span><span style=\"color:#ff5c57\">echo</span> <span style=\"color:#5af78e\">\"Hello world\"</span>\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span><span style=\"color:#78787e\"># test comment</span>\n</span></span><span style=\"display:flex;\"><span>docker compose up -d\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span><span style=\"color:#78787e\"># this is where the fun begins!!</span>\n</span></span><span style=\"display:flex;\"><span>sudo rm -rf /</span></span></code></pre>" } }, { "id": "J4JNR4QdKX", "type": "bellsybable", "data": { "fileName": "sample.py", "style": "dracula", "language": "python", "rawCode": "import json\n\nexample_dict = {'hello': 'world'}\n\nprint(example_dict)", "formattedCode": "<pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#282a36;\"><code><span style=\"display:flex;\"><span><span style=\"color:#ff79c6\">import</span> json\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span>example_dict <span style=\"color:#ff79c6\">=</span> {<span style=\"color:#f1fa8c\"></span><span style=\"color:#f1fa8c\">'</span><span style=\"color:#f1fa8c\">hello</span><span style=\"color:#f1fa8c\">'</span>: <span style=\"color:#f1fa8c\"></span><span style=\"color:#f1fa8c\">'</span><span style=\"color:#f1fa8c\">world</span><span style=\"color:#f1fa8c\">'</span>}\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span><span style=\"color:#8be9fd;font-style:italic\">print</span>(example_dict)</span></span></code></pre>" } }], "version": "2.29.0" }
     });
 
     const saveButton = document.querySelector('.save-button');
@@ -61,6 +57,7 @@
 
     saveButton.addEventListener('click', () => {
       editor.save().then(savedData => {
+        console.log(JSON.stringify(savedData));
         output.innerHTML = JSON.stringify(savedData, null, 4);
       });
     });
