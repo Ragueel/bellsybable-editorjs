@@ -1,7 +1,7 @@
 {
   "name": "bellsybable-block",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": {
@@ -19,5 +19,12 @@
     "vite": "^5.0.8",
     "vite-plugin-css-injected-by-js": "^3.3.1"
   },
+  "license": "MIT",
+  "keywords": [
+    "editor.js",
+    "code",
+    "tool",
+    "editorjs"
+  ],
   "dependencies": {}
 }

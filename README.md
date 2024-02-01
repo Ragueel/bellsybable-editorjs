@@ -4,18 +4,20 @@ Generate beautiful code blocks with syntax highlights for editor.js.
 
 ![Demo Usage](/assets/demo.gif)
 
-Ideally should be used with [https://github.com/Ragueel/bellsybable](https://github.com/Ragueel/bellsybable)
+Ideally the block should be used with this backend server:
+
+[https://github.com/Ragueel/bellsybable](https://github.com/Ragueel/bellsybable)
 
 ## Installation
 
 ```bash
-npm i raguel_@bellsybable-editor
+npm i bellsybable-block
 ```
 
 ## Usage
 
 ```javascript
-import BellsybableBlock from "raguel_@bellsybable-editor";
+import BellsybableBlock from "bellsybable-block";
 
 const editor = new EditorJS({
   autofocus: true,
@@ -37,7 +39,7 @@ const editor = new EditorJS({
 | generatorFunction | Function used to send your request. See payload structure:[Payload](/https://github.com/Ragueel/bellsybable-editorjs/) |
 | generateUrl       | If you are using default generator just change it to a desired endpoint                                                |
 | styles            | Generation styles that can be used during rendering. See: [styles](/docs/styles.md)                                    |
-| languages         | Languages that highlight should work. See: [languages](/docs/languages.md)                                             |
+| languages         | Languages that bellsybable should work. See: [languages](/docs/languages.md)                                           |
 | autoGenerate      | `true` or `false` whether to send automatically render request after user finishes typing                              |
 | defaultStyle      | which style should new blocks use                                                                                      |
 | defaultLanguage   | which language is selected by default                                                                                  |

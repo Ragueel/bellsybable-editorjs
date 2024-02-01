@@ -1,6 +1,6 @@
 # Supported styles
 
-It Can be found in constants inside `/src/constants.ts`
+It can be found in constants inside `/src/constants.ts`
 
 But here is the list:
 
