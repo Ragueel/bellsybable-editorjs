@@ -4,9 +4,11 @@ Generate beautiful code blocks with syntax highlights for editor.js.
 
 ![Demo Usage](/assets/demo.gif)
 
-Ideally the block should be used with this backend server:
+Ideally the bellsybable-block should be used with this backend server that does SSR of the raw code:
 
 [https://github.com/Ragueel/bellsybable](https://github.com/Ragueel/bellsybable)
+
+It has integration with [https://github.com/alecthomas/chroma](https://github.com/alecthomas/chroma) which does the heavy the lifting of converting the strings into a stream of tokens, and then applies styling to them.
 
 ## Installation
 
@@ -43,6 +45,22 @@ const editor = new EditorJS({
 | autoGenerate      | `true` or `false` whether to send automatically render request after user finishes typing                              |
 | defaultStyle      | which style should new blocks use                                                                                      |
 | defaultLanguage   | which language is selected by default                                                                                  |
+
+## Output Data
+
+```json
+{
+  "id": "J4JNR4QdKX",
+  "type": "bellsybable",
+  "data": {
+    "fileName": "sample.py",
+    "style": "dracula",
+    "language": "python",
+    "rawCode": "import json\n\nexample_dict = {'hello': 'world'}\n\nprint(example_dict)",
+    "formattedCode": "<pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#282a36;\"><code><span style=\"display:flex;\"><span><span style=\"color:#ff79c6\">import</span> json\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span>example_dict <span style=\"color:#ff79c6\">=</span> {<span style=\"color:#f1fa8c\"></span><span style=\"color:#f1fa8c\">'</span><span style=\"color:#f1fa8c\">hello</span><span style=\"color:#f1fa8c\">'</span>: <span style=\"color:#f1fa8c\"></span><span style=\"color:#f1fa8c\">'</span><span style=\"color:#f1fa8c\">world</span><span style=\"color:#f1fa8c\">'</span>}\n</span></span><span style=\"display:flex;\"><span>\n</span></span><span style=\"display:flex;\"><span><span style=\"color:#8be9fd;font-style:italic\">print</span>(example_dict)</span></span></code></pre>"
+  }
+}
+```
 
 ## Custom backend
 
