@@ -12,14 +12,14 @@ class BellsybableBlock {
 
   static get toolbox() {
     return {
-      title: 'Bellsybable Code Block',
-      icon: '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>'
+      title: 'BB Code Block',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg>'
     };
   }
 
   constructor(block: any) {
     this.data = Object.keys(block.data).length > 0 ? <SaveData>block.data : null;
-    this.config = Object.keys(block.config).length > 0 ? <Config>block.config : new Config();
+    this.config = Object.keys(block.config).length > 0 ? Config.fromExistingConfig(block.config) : new Config();
     this.wrapper = null;
   }
 
@@ -90,6 +90,9 @@ class BellsybableBlock {
     const code = this._getRawCode();
     const language = this._getLanguage();
     const style = this._getStyle();
+    if (code.length == 0) {
+      return
+    }
 
     const request = new RenderRequest(code, style, language);
 
