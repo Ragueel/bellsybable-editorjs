@@ -2,7 +2,7 @@
 
 Generate beautiful code blocks with syntax highlights for editor.js.
 
-![Demo Usage](/assets/demo.gif)
+![Demo Usage](https://raw.githubusercontent.com/Ragueel/bellsybable-editorjs/main/assets/demo.gif)
 
 Ideally the bellsybable-block should be used with this backend server that does SSR of the raw code:
 
