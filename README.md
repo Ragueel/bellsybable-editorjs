@@ -36,15 +36,15 @@ const editor = new EditorJS({
 
 ### Configuration Options:
 
-| name              | description                                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| generatorFunction | Function used to send your request. See payload structure:[Payload](/https://github.com/Ragueel/bellsybable-editorjs/) |
-| generateUrl       | If you are using default generator just change it to a desired endpoint                                                |
-| styles            | Themes that can be used during rendering. See: [styles](/docs/styles.md)                                               |
-| languages         | Languages that bellsybable supports. See: [languages](/docs/languages.md)                                              |
-| autoGenerate      | `true` or `false` whether to send automatically render request after user finishes typing                              |
-| defaultStyle      | which style should new blocks use                                                                                      |
-| defaultLanguage   | which language is selected by default                                                                                  |
+| name              | description                                                                                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| generatorFunction | Function used to send your request. See payload structure:[Payload](https://github.com/Ragueel/bellsybable-editorjs/tree/main?tab=readme-ov-file#custom-backend) |
+| generateUrl       | If you are using default generator just change it to a desired endpoint                                                                                          |
+| styles            | Themes that can be used during rendering. See: [styles](https://github.com/Ragueel/bellsybable-editorjs/blob/main/docs/languages.md)                             |
+| languages         | Languages that bellsybable supports. See: [languages](https://github.com/Ragueel/bellsybable-editorjs/blob/main/docs/styles.md)                                  |
+| autoGenerate      | `true` or `false` whether to send automatically render request after user finishes typing                                                                        |
+| defaultStyle      | which style should new blocks use                                                                                                                                |
+| defaultLanguage   | which language is selected by default                                                                                                                            |
 
 ## Output Data
 
