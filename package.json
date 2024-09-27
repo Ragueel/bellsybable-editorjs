@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/node": "^20.11.15",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8",
+    "vite": "^5.4.8",
     "vite-plugin-css-injected-by-js": "^3.3.1",
     "vite-plugin-dts": "^3.7.2"
   },
